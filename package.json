@@ -1,0 +1,31 @@
+{
+  "name": "substraction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^3.13.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.41.3",
+    "express": "^4.19.2",
+    "File": "^0.10.2",
+    "graphql": "^15.6.0",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-upload": "^11.0.0",
+    "graphql-ws": "^5.16.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.4",
+    "mongoose-double": "^0.0.1",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "path": "^0.12.7",
+    "subscriptions-transport-ws": "^0.11.0",
+    "ws": "^8.17.1"
+  }
+}
