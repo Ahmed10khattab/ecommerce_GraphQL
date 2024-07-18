@@ -123,6 +123,7 @@
 
 
 
+
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const { createServer } = require("http");
@@ -131,6 +132,8 @@ const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { execute, subscribe } = require("graphql");
 const schema = require("./graph_schema/graphqlSchema");
 const { graphqlUploadExpress } = require("graphql-upload");
+const multer = require('multer');
+const modelfile = require("./models/file");
 const bodyparser = require("body-parser");
 
 const app = express();
@@ -139,12 +142,11 @@ app.use(graphqlUploadExpress());
 
 const httpServer = createServer(app);
 
-let subscriptionServer;  // Declare subscriptionServer here to avoid reference errors later
 
 const server = new ApolloServer({
   schema,
-  introspection: true,  // Enable introspection
-  playground: true,     // Enable GraphQL playground
+  introspection:true,
+  playground: true, 
   plugins: [
     {
       async serverWillStart() {
@@ -161,7 +163,7 @@ const server = new ApolloServer({
 server.start().then(() => {
   server.applyMiddleware({ app });
 
-  subscriptionServer = SubscriptionServer.create(
+  const subscriptionServer = SubscriptionServer.create(
     {
       schema,
       execute,
@@ -172,21 +174,19 @@ server.start().then(() => {
       path: server.graphqlPath,
     }
   );
-
-  const port = process.env.PORT || 4000;  // Use process.env.PORT if available
+  const port = 4000 || process.env.PORT;
   mongoose
     .connect(
-      "mongodb://graph:BjzkIBYPDe9cARVP@ac-pka8jeg-shard-00-00.ytbxqwi.mongodb.net:27017,ac-pka8jeg-shard-00-01.ytbxqwi.mongodb.net:27017,ac-pka8jeg-shard-00-02.ytbxqwi.mongodb.net:27017/firstProject?replicaSet=atlas-d5fq1b-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=AtlasCluster",
-      { useNewUrlParser: true, useUnifiedTopology: true }
+      "mongodb://graph:BjzkIBYPDe9cARVP@ac-pka8jeg-shard-00-00.ytbxqwi.mongodb.net:27017,ac-pka8jeg-shard-00-01.ytbxqwi.mongodb.net:27017,ac-pka8jeg-shard-00-02.ytbxqwi.mongodb.net:27017/firstProject?replicaSet=atlas-d5fq1b-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=AtlasCluster"
     )
     .then(() => {
       console.log("Connected to MongoDB");
       httpServer.listen(port, () => {
         console.log(
-          `Server ready at http://localhost:${port}${server.graphqlPath}`
+          `Server ready at http://localhost:4000${server.graphqlPath}`
         );
         console.log(
-          `Subscriptions ready at ws://localhost:${port}${server.graphqlPath}`
+          `Subscriptions ready at ws://localhost:4000${server.graphqlPath}`
         );
       });
     })
@@ -194,4 +194,6 @@ server.start().then(() => {
       console.error("Error connecting to MongoDB", error);
     });
 });
+
+
 
