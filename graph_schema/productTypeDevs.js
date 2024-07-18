@@ -97,9 +97,10 @@ const productTypeDefs = gql`
     deleteAllProducts: String
   }
 
-  type Subscription {
-    productAdded: Product
-  }
+
 `;
 
 module.exports = productTypeDefs;
+// type Subscription {
+//     productAdded: Product
+//   }

@@ -75,7 +75,7 @@ const mutationResolvers = {
       price,
       inFavorites,
     });
-    pubsub.publish(PRODUCT_ADDED, { productAdded: savedProduct });
+     pubsub.publish(PRODUCT_ADDED, { productAdded: savedProduct });
     return savedProduct;
   },
   deleteProductById: async (_,{id}) => {
