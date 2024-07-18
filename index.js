@@ -145,6 +145,8 @@ const httpServer = createServer(app);
 
 const server = new ApolloServer({
   schema,
+  introspection:true,
+  playground: true, // Enable introspection
   plugins: [
     {
       async serverWillStart() {
