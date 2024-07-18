@@ -172,14 +172,14 @@ server.start().then(() => {
       path: server.graphqlPath,
     }
   );
-
+  const port = 4000 || process.env.PORT;
   mongoose
     .connect(
       "mongodb://graph:BjzkIBYPDe9cARVP@ac-pka8jeg-shard-00-00.ytbxqwi.mongodb.net:27017,ac-pka8jeg-shard-00-01.ytbxqwi.mongodb.net:27017,ac-pka8jeg-shard-00-02.ytbxqwi.mongodb.net:27017/firstProject?replicaSet=atlas-d5fq1b-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=AtlasCluster"
     )
     .then(() => {
       console.log("Connected to MongoDB");
-      httpServer.listen(4000, () => {
+      httpServer.listen(port, () => {
         console.log(
           `Server ready at http://localhost:4000${server.graphqlPath}`
         );
